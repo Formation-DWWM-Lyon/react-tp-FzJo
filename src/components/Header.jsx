@@ -2,26 +2,32 @@ import React from "react";
 import {
   Navbar,
   Nav,
-  NavDropdown,
   Form,
   FormControl,
   Button
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Image } from "react-bootstrap";
+import { lobster } from "../img/index";
+
+
 
 const Header = () => (
   <header>
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="#home">Beautiful (?) Social App</Navbar.Brand>
+      <Navbar.Brand href="#home" className="title">
+        Dev'Lobster
+        <Image className="lobster-logo" src={lobster} />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Navbar.Text>
-            <Link to="/">Home</Link>
+            <Link to="/">Settings</Link>
           </Navbar.Text>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
-          </NavDropdown>
+          <Navbar.Text>
+            <Link to="/">Messages</Link>
+          </Navbar.Text>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -31,4 +37,5 @@ const Header = () => (
     </Navbar>
   </header>
 );
+
 export default Header;
