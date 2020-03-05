@@ -7,15 +7,15 @@ import Header from "../components/Header";
 
 export default class DataContainer extends Component {
   state = {
-    result: null
+    data: null
   };
 
-  fetchData = () => {
-    let url = `https://randomuser.me/api/?page=1&results=10`;
+  fetchData = (page) => {
+    let url = `https://randomuser.me/api/?page=${page}&datas=10&seed=abc&nat=fr`;
     Axios.get(url)
       .then(response => {
         console.log(response);
-        this.setState({ result: response.data.results });
+        this.setState({ data: response.data.datas });
       })
       .catch(error => console.error(error));
   };
@@ -26,10 +26,10 @@ export default class DataContainer extends Component {
   };
 
   render = () => {
-    const { result } = this.state;
-    console.log(result);
+    const { data } = this.state;
+    console.log(data);
 
-    if (!result) {
+    if (!data) {
       return (
         <div className="text-center">
           <Loader type="Bars" color="#231F20" height={80} width={80} />
@@ -37,12 +37,12 @@ export default class DataContainer extends Component {
       );
     }
 
-    if (result) {
+    if (data) {
       return (
         <div>
           <Header />
           <ListGroup className="card-list">
-            {result.map((item, index) => (
+            {data.map((item, index) => (
               <ListGroup.Item key={index}>
                 <ul>
                   <Image className="img" src={item.picture.thumbnail} />
@@ -55,8 +55,8 @@ export default class DataContainer extends Component {
               </ListGroup.Item>
             ))}
           </ListGroup>
-          <Button onClick={e => this.fetchData(result.info - 1)}>Prev</Button>
-          <Button onClick={e => this.fetchData(result.info + 1)}>Next</Button>
+          <Button onClick={() => this.fetchData(data.info.page - 1)}>Prev</Button>
+          <Button onClick={() => this.fetchData(data.info.page + 1)}>Next</Button>
         </div>
       );
     }
