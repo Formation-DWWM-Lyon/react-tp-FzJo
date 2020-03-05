@@ -11,6 +11,10 @@
   }
 
   .lobster-logo {
-    width: 6em;
-    height: 3em;
+    width: 171px;
+    height: 180px;
+  }
+  
+  .photo-profil{
+    border-radius: 30px;
   }
