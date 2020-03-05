@@ -1,5 +1,16 @@
-  .card-list {
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+
+.card-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1em;
+  }
+
+  .title {
+    font-family: Comfortaa, Arial, Helvetica, sans-serif;
+  }
+
+  .lobster-logo {
+    width: 6em;
+    height: 3em;
   }
