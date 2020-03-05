@@ -1,28 +1,30 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import Loader from "react-loader-spinner";
-// import Profile from "../components/Profile";
 
-// const componentsByResource = {
-//   profile: Profile
-// };
+const List = [
+  {
+    name: ""
+  }
+];
 
 export default class DataContainer extends Component {
   state = {
-    data: null
+    users: []
   };
 
   fetchData = () => {
-    // const { resource } = this.props.match.params;
     let url = `https://randomuser.me/api/?page=1&results=10&seed=abc&nat=fr`;
-
     Axios.get(url)
-      // .then(response => this.setState({ data: response.data }))
-      .then(response => console.log(response))
+      .then(response => {
+        console.log(response);
+        this.setState({ data: response.data });
+      })
       .catch(error => console.error(error));
   };
 
   componentDidMount = () => {
+    console.log("in componentDidMount");
     this.fetchData();
   };
 
@@ -36,5 +38,7 @@ export default class DataContainer extends Component {
         </div>
       );
     }
+
+    return <div></div>;
   };
 }
