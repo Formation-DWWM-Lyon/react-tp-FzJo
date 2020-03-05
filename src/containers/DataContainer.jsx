@@ -5,6 +5,7 @@ import { ListGroup, Button } from "react-bootstrap";
 import { Image } from "react-bootstrap";
 import Header from "../components/Header";
 import Profil from "../components/Profil";
+import { Link } from "react-router-dom";
 
 export default class DataContainer extends Component {
   state = {
@@ -26,9 +27,18 @@ export default class DataContainer extends Component {
     this.fetchData();
   };
 
-  render = () => {
+  showDetails = (event, page) => {
     const { data } = this.state;
     console.log(data);
+    console.log(this.props);
+    if (data) {
+      console.log("go to profil");
+      return <Link to="/profil" />;
+    }
+  };
+
+  render = () => {
+    const { data } = this.state;
 
     if (!data) {
       return (
@@ -57,6 +67,13 @@ export default class DataContainer extends Component {
                   <p>
                     From {item.location.city} in {item.location.country}
                   </p>
+                  <Button
+                    type="submit"
+                    name={`key${index}`}
+                    onClick={e => this.showDetails(index, data.info.page)}
+                  >
+                    Details
+                  </Button>
                 </ul>
               </ListGroup.Item>
             ))}
