@@ -1,12 +1,13 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { HomePage } from './pages';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <Container>
-      Votre code ici!
-    </Container>
-  );
-}
+const App = () =>
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+    </Switch>
+  </BrowserRouter>
+  ;
 
 export default App;
