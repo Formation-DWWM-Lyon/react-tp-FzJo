@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import Loader from "react-loader-spinner";
 import { ListGroup } from "react-bootstrap";
-
-// const UserList = ({ name }) => {
-//   return <ListGroup.Item>{name}</ListGroup.Item>;
-// };
+import { Image } from "react-bootstrap";
 
 export default class DataContainer extends Component {
   state = {
@@ -43,8 +40,16 @@ export default class DataContainer extends Component {
       return (
         <ListGroup>
           {result.map((item, index) => (
-            <ListGroup.Item key={index}>{item.name.last}</ListGroup.Item>
-            // <UserList key={index}>{item.name.last}</UserList>
+            <ListGroup.Item key={index}>
+              <ul>
+                <Image className="img" src={item.picture.thumbnail} />
+                <p>
+                  {item.name.first} {item.name.last}
+                </p>
+                <p>From {item.location.city}</p>
+                <p>{item.gender}</p>
+              </ul>
+            </ListGroup.Item>
           ))}
         </ListGroup>
       );
