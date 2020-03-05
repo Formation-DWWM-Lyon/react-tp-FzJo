@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import Loader from "react-loader-spinner";
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 import { Image } from "react-bootstrap";
 import Header from "../components/Header";
 
@@ -55,6 +55,8 @@ export default class DataContainer extends Component {
               </ListGroup.Item>
             ))}
           </ListGroup>
+          <Button onClick={e => this.fetchData(result.info - 1)}>Prev</Button>
+          <Button onClick={e => this.fetchData(result.info + 1)}>Next</Button>
         </div>
       );
     }
