@@ -4,19 +4,20 @@ import Loader from "react-loader-spinner";
 import { ListGroup, Button } from "react-bootstrap";
 import { Image } from "react-bootstrap";
 import Header from "../components/Header";
+import Profil from "../components/Profil";
 
 export default class DataContainer extends Component {
   state = {
     data: null
   };
 
-  fetchData = (page) => {
-    let url = `https://randomuser.me/api/?page=${page}&datas=10&seed=abc&nat=fr`;
+  fetchData = page => {
+    if (!page || 0 === page) {
+      page = 1;
+    }
+    let url = `https://randomuser.me/api/?page=${page}&results=10&seed=abc&nat=fr`;
     Axios.get(url)
-      .then(response => {
-        console.log(response);
-        this.setState({ data: response.data.datas });
-      })
+      .then(response => this.setState({ data: response.data }))
       .catch(error => console.error(error));
   };
 
@@ -42,25 +43,33 @@ export default class DataContainer extends Component {
         <div>
           <Header />
           <ListGroup className="card-list">
-            {data.map((item, index) => (
+            {data.results.map((item, index) => (
               <ListGroup.Item key={index}>
                 <ul>
-                  <Image className="img" src={item.picture.thumbnail} />
+                  <Image className="photo-profil" src={item.picture.large} />
                   <p>
-                    {item.name.first} {item.name.last}
+                    {item.name.first} {item.name.last} {item.dob.age}
                   </p>
-                  <p>From {item.location.city}</p>
-                  <p>{item.gender}</p>
+                  <p>
+                    {item.login.first} a.k.a {item.login.username}
+                  </p>
+                  <p>Join Dev'Lobster {item.registered.age} ago !</p>
+                  <p>
+                    From {item.location.city} in {item.location.country}
+                  </p>
                 </ul>
               </ListGroup.Item>
             ))}
           </ListGroup>
-          <Button onClick={() => this.fetchData(data.info.page - 1)}>Prev</Button>
-          <Button onClick={() => this.fetchData(data.info.page + 1)}>Next</Button>
+          <Button onClick={e => this.fetchData(data.info.page - 1)}>
+            Prev
+          </Button>
+          <Button onClick={e => this.fetchData(data.info.page + 1)}>
+            Next
+          </Button>
         </div>
       );
     }
-
-    return <div></div>;
+    return <Profil {...data} />;
   };
 }
