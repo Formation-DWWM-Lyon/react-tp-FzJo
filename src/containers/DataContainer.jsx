@@ -3,6 +3,7 @@ import Axios from "axios";
 import Loader from "react-loader-spinner";
 import { ListGroup } from "react-bootstrap";
 import { Image } from "react-bootstrap";
+import Header from "../components/Header";
 
 export default class DataContainer extends Component {
   state = {
@@ -38,20 +39,23 @@ export default class DataContainer extends Component {
 
     if (result) {
       return (
-        <ListGroup>
-          {result.map((item, index) => (
-            <ListGroup.Item key={index}>
-              <ul>
-                <Image className="img" src={item.picture.thumbnail} />
-                <p>
-                  {item.name.first} {item.name.last}
-                </p>
-                <p>From {item.location.city}</p>
-                <p>{item.gender}</p>
-              </ul>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+        <div>
+          <Header />
+          <ListGroup className="card-list">
+            {result.map((item, index) => (
+              <ListGroup.Item key={index}>
+                <ul>
+                  <Image className="img" src={item.picture.thumbnail} />
+                  <p>
+                    {item.name.first} {item.name.last}
+                  </p>
+                  <p>From {item.location.city}</p>
+                  <p>{item.gender}</p>
+                </ul>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
       );
     }
 
